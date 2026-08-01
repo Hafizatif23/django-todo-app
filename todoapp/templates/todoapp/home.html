@@ -1,0 +1,30 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'todoapp/style.css' %}">
+
+<div class="container">
+    <h1>My Tasks</h1>
+    <ul>
+    {% for t in tasks %}
+        <li>
+            <span class="task-title">
+                {% if t.done %}
+                    <s>{{ t.title }}</s>
+                {% else %}
+                    {{ t.title }}
+                {% endif %}
+            </span>
+            <span class="actions">
+                <a class="toggle" href="/toggle/{{ t.id }}/">Done</a>
+                <a class="edit" href="/edit/{{ t.id }}/">Edit</a>
+                <a class="delete" href="/delete/{{ t.id }}/">Delete</a>
+            </span>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="new_task" placeholder="Add a new task...">
+        <button type="submit">Add</button>
+    </form>
+</div>

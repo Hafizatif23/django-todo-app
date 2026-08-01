@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'todoapp/style.css' %}">
+
+<div class="container">
+    <h1>Edit Task</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="new_title" value="{{ task.title }}">
+        <button type="submit">Save</button>
+    </form>
+</div>
